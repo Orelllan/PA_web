@@ -1,0 +1,882 @@
+<!doctype html>
+    <html lang="es">
+        <head>
+        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Maderera Guzmán F y H | Catálogo y cotizaciones</title>
+        <style>
+            :root{
+                --forest:#173d2c;
+                --green:#28583e;
+                --gold:#c89a52;
+                --cream:#f7f3eb;
+                --ink:#1e2923;
+                --muted:#66736b;
+                --white:#fff;
+                --line:#e4e0d6
+            }
+            *{box-sizing:border-box}
+            html{
+                scroll-behavior:smooth
+            }
+            body{
+                margin:0;
+                font-family:Arial,Helvetica,sans-serif;
+                color:var(--ink);
+                background:#fff;line-height:1.55
+            }
+            a{
+                color:inherit;
+                text-decoration:none
+            }
+            .top{
+                background:var(--forest);
+                color:white;
+                text-align:center;
+                padding:8px 16px;
+                font-size:13px;
+                letter-spacing:.3px
+            }
+            .nav{
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:20px;padding:18px max(5vw,20px);
+                background:#fff;position:sticky;
+                top:0;z-index:10;
+                border-bottom:1px solid var(--line)
+            }
+            .brand{
+                display:flex;
+                align-items:center;
+                gap:12px;
+                font-weight:800;
+                color:var(--forest);
+                line-height:1.1
+            }
+            .logo{
+                width:44px;
+                height:44px;
+                border-radius:10px;
+                background:var(--forest);
+                color:#f5d9a3;
+                display:grid;
+                place-items:center;
+                font-size:14px;
+                letter-spacing:-1px
+            }
+            .brand small{
+                display:block;
+                color:var(--muted);
+                font-weight:500;
+                font-size:11px;
+                letter-spacing:1.4px;
+                margin-top:5px
+            }
+            .navlinks{
+                display:flex;
+                gap:22px;
+                font-size:14px;
+                font-weight:700
+            }
+            .navlinks a:hover{
+                color:var(--gold)
+            }
+            .btn{
+                display:inline-block;
+                background:var(--gold);
+                color:#1b2b20;
+                border:0;
+                border-radius:6px;
+                padding:12px 18px;
+                font-weight:800;
+                cursor:pointer;
+                font-size:14px
+            }
+            .btn.dark{
+                background:var(--forest);
+                color:#fff
+            }
+            .hero{
+                background:linear-gradient(100deg,rgba(12,39,26,.93),rgba(18,49,34,.78)),
+                repeating-linear-gradient(90deg,#7e5a37 0,#9b744d 15px,#785333 30px);
+                color:#fff;
+                padding:76px max(7vw,24px) 72px;
+                display:grid;
+                grid-template-columns:1.2fr .8fr;
+                gap:45px;align-items:center
+            }
+            .eyebrow{
+                color:#f2ce8d;
+                font-size:12px;
+                font-weight:800;
+                letter-spacing:2px;
+                text-transform:uppercase
+            }
+            .hero h1{
+                font-size:clamp(36px,5vw,60px);
+                line-height:1.06;
+                margin:14px 0 20px;
+                max-width:700px
+            }
+            .hero p{
+                color:#e1e9e2;
+                max-width:610px;
+                font-size:17px
+            }
+            .hero-actions{
+                display:flex;
+                gap:12px;
+                flex-wrap:wrap;
+                margin-top:28px
+            }
+            .btn.outline{
+                background:transparent;
+                border:1px solid #d6e1d8;
+                color:#fff
+            }
+            .hero-card{
+                background:#f9f5ed;
+                color:var(--ink);
+                padding:26px;
+                border-radius:12px;
+                box-shadow:0 18px 45px #0002
+            }
+            .hero-card h3{
+                margin:0 0 14px;color:var(--forest);
+                font-size:22px
+            }
+            .quick{
+                display:flex;
+                gap:12px;
+                align-items:flex-start;
+                padding:12px 0;
+                border-bottom:1px solid var(--line)
+            }
+            .quick:last-child{
+                border:0
+            }
+            .check{
+                width:28px;
+                height:28px;
+                border-radius:50%;
+                display:grid;
+                place-items:center;
+                background:#e4ecdf;
+                color:var(--green);
+                font-weight:bold;
+                flex-shrink:0
+            }
+            .section{
+                padding:64px max(6vw,22px)
+            }
+            .section.alt{
+                background:var(--cream)
+            }
+            .section-head{
+                text-align:center;
+                max-width:720px;
+                margin:0 auto 34px
+            }
+            .section-head .eyebrow{
+                color:var(--green)
+            }
+            h2{font-size:clamp(28px,3vw,40px);
+                line-height:1.15;
+                margin:10px 0 12px;
+                color:var(--forest)
+            }
+            .section-head p{
+                color:var(--muted);
+                margin:0
+            }
+            .grid{display:grid;
+                grid-template-columns:repeat(3,1fr);
+                gap:20px}.product{background:#fff;
+                border:1px solid var(--line);
+                border-radius:10px;overflow:hidden
+            }
+            .wood{
+                height:150px;
+                background:repeating-linear-gradient(6deg,#c6a57b 0,#c6a57b 5px,#d9bc93 6px,#b38c61 9px,#d5b48a 13px);
+                position:relative
+            }
+            .wood::after{
+                content:'MADERA SELECCIONADA';
+                position:absolute;bottom:12px;
+                left:14px;
+                background:#fffdf2dd;
+                padding:5px 9px;
+                border-radius:4px;
+                font-size:10px;
+                font-weight:800;
+                letter-spacing:1px;
+                color:var(--forest)
+            }
+            .wood.w2{
+                background:repeating-linear-gradient(3deg,#784c35 0,#784c35 5px,#996749 7px,#603d2c 10px,#8d5d40 14px)
+            }
+            .wood.w3{
+                background:repeating-linear-gradient(-4deg,#b58c56 0,#b58c56 4px,#d0ad79 7px,#987244 10px,#c6a06c 15px)
+            }
+            .wood.w4{
+                background:repeating-linear-gradient(1deg,#a17a58 0,#a17a58 4px,#c09a73 7px,#896345 10px,#b28b65 14px)
+            }
+            .wood.w5{
+                background:repeating-linear-gradient(5deg,#d4b994 0,#d4b994 5px,#e4ceb0 8px,#bca17b 11px,#dac19d 15px)
+            }
+            .wood.w6{
+                background:repeating-linear-gradient(-2deg,#594333 0,#594333 5px,#785b43 7px,#3d3026 10px,#684c37 15px)
+            }
+            .product-body{
+                padding:19px
+            }
+            .product h3{
+                color:var(--forest);margin:0 0 6px;font-size:21px
+            }
+            .product p{
+                color:var(--muted);
+                font-size:14px;
+                min-height:44px;
+                margin:0 0 14px
+            }
+            .tag{
+                display:inline-block;
+                background:#eef1e9;
+                color:var(--green);
+                font-size:11px;
+                font-weight:800;
+                padding:5px 8px;
+                border-radius:4px;
+                margin-bottom:12px
+            }
+            .product .btn{
+                padding:10px 13px
+            }
+            .feature-grid{
+                display:grid;
+                grid-template-columns:repeat(3,1fr);
+                gap:20px
+            }
+            .feature{
+                padding:24px;
+                border:1px solid var(--line);
+                border-radius:10px;
+                background:#fff
+            }
+            .feature .symbol{
+                font-size:26px
+            }
+            .feature h3{
+                color:var(--forest);
+                margin:12px 0 6px
+            }
+            .feature p{
+                font-size:14px;
+                color:var(--muted);
+                margin:0
+            }
+            .quote-wrap{
+                display:grid;
+                grid-template-columns:.8fr 1.2fr;
+                gap:34px;
+                align-items:start
+            }
+            .quote-info{
+                background:var(--forest);
+                color:#fff;
+                border-radius:12px;
+                padding:28px;
+                position:sticky;
+                top:100px
+            }
+            .quote-info h3{
+                font-size:25px;
+                margin:0 0 10px
+            }
+            .quote-info p{
+                color:#dce7dd
+            }
+            .quote-info li{
+                margin:10px 0;
+                color:#eaf0e9
+            }
+            .form{
+                background:#fff;
+                border:1px solid var(--line);
+                border-radius:12px;
+                padding:28px;
+                box-shadow:0 8px 30px #183a2610
+            }
+            .form h3{
+                margin:0 0 6px;
+                color:var(--forest);
+                font-size:24px
+            }
+            .form-intro{
+                color:var(--muted);
+                font-size:14px;
+                margin:0 0 22px
+            }
+            .fields{
+                display:grid;grid-template-columns:1fr 1fr;gap:16px
+            }
+            .field{
+                display:flex;
+                flex-direction:column;
+                gap:6px
+            }
+            .field.full{
+                grid-column:1/-1
+            }
+            label{
+                font-size:13px;
+                font-weight:800;
+                color:#35443a
+            }
+            input,select,textarea{
+                font:inherit;
+                border:1px solid #d5dacf;
+                border-radius:6px;
+                padding:12px;
+                background:#fff;
+                width:100%;
+                color:var(--ink)
+            }
+            input:focus,select:focus,textarea:focus{
+                outline:2px solid #c6d7c7;
+                border-color:var(--green)
+            }
+            textarea{
+                min-height:95px;
+                resize:vertical
+            }
+            .estimate{
+                margin:18px 0;
+                padding:14px 16px;
+                border-radius:7px;
+                background:#f2f4ee;
+                color:var(--forest);
+                font-size:14px
+            }
+            .estimate strong{
+                display:block;
+                font-size:18px
+            }
+            .form-note{
+                font-size:12px;
+                color:var(--muted);
+                margin:12px 0 0
+            }
+            .form-actions{
+                display:flex;
+                gap:12px;
+                flex-wrap:wrap;
+                margin-top:18px
+            }
+            .contact{
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:22px
+            }
+            .contact-card{
+                padding:26px;
+                border-radius:10px;
+                background:#fff;
+                border:1px solid var(--line)
+            }.contact-card h3{
+                margin:0 0 8px;
+                color:var(--forest)
+            }footer{
+                background:#102d20;
+                color:#e7eee8;
+                padding:34px max(6vw,22px);
+                display:flex;
+                justify-content:space-between;
+                gap:20px;flex-wrap:wrap;
+                font-size:13px
+            }
+            footer small{
+                color:#b8c9bd
+            }
+            .mobile-menu{
+                display:none
+            }
+            @media(max-width:800px){
+                .navlinks{
+                    display:none
+                }
+                .hero{
+                    grid-template-columns:1fr;
+                    padding-top:52px
+                }
+                .grid,.feature-grid{
+                    grid-template-columns:repeat(2,1fr)
+                }
+                .quote-wrap{
+                    grid-template-columns:1fr
+                }
+                .quote-info{
+                    position:static
+                }
+                .contact{
+                    grid-template-columns:1fr
+                }}
+            @media(max-width:520px){
+                .grid,.feature-grid,.fields{
+                        grid-template-columns:1fr
+                }
+                .field.full{
+                    grid-column:auto
+                }
+                .nav{
+                    padding:14px 18px
+                }
+                .nav .btn{
+                    padding:10px 12px;
+                    font-size:12px
+                }
+                .hero{
+                    padding-left:20px;
+                    padding-right:20px
+                }
+                .section{
+                    padding:48px 18px
+                }
+                .form{
+                    padding:20px
+                }
+                .hero-card{
+                    padding:20px
+                }}
+        </style>
+        </head>
+        <body>
+
+        <div class="top">MADERA PARA TUS PROYECTOS · ATENCIÓN PERSONALIZADA · COTIZA SIN COMPROMISO</div>
+
+        <nav class="nav">
+            <a class="brand" href="#inicio">
+                <span class="logo">G<span style="color:#fff">&</span>H</span>
+                <span>MADERERA GUZMÁN F y H<small>CALIDAD · CONFIANZA · MADERA</small></span>
+            </a>
+            <div class="navlinks">
+                <a href="#catalogo">Catálogo</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#cotizar">Cotizar</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <a class="btn dark" href="#cotizar">Solicitar cotización</a>
+        </nav>
+
+        <header class="hero" id="inicio">
+            <div>
+                <div class="eyebrow">Tu proyecto empieza con buena madera</div>
+                <h1>La madera adecuada para construir mejor.</h1>
+                <p>
+                    Encuentra opciones de madera para construcción, 
+                    carpintería y acabados. Elige el tipo, 
+                    indica las medidas y la cantidad que necesitas y solicita una cotización personalizada.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn" href="#catalogo">Explorar maderas</a>
+                    <a class="btn outline" href="#cotizar">Cotizar mi pedido →</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3>¿Qué necesitas para tu proyecto?</h3>
+                <div class="quick">
+                    <span class="check">✓</span>
+                    <div>
+                        <b>Escoge el tipo de madera</b>
+                        <br>
+                        <small>Consulta las opciones disponibles.</small>
+                    </div>
+                </div>
+                <div class="quick">
+                    <span class="check">✓</span>
+                    <div>
+                        <b>Indica medidas y cantidad</b>
+                        <br>
+                        <small>Agrega largo, ancho, espesor o piezas.</small>
+                    </div>
+                </div>
+                <div class="quick">
+                    <span class="check">✓</span>
+                    <div>
+                        <b>Recibe una cotización</b>
+                        <br>
+                        <small>El precio final se confirma según disponibilidad y especificaciones.</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="section" id="catalogo">
+            <div class="section-head">
+                <div class="eyebrow">Catálogo de productos</div>
+                <h2>Encuentra la madera que buscas</h2>
+                <p>
+                    Selecciona una opción para empezar tu solicitud. 
+                    El catálogo es editable: agrega o quita especies según el inventario real de la empresa.
+                </p>
+            </div>
+            <div class="grid">
+                <article class="product">
+                    <div class="wood"></div>
+                    <div class="product-body">
+                        <span class="tag">CONSTRUCCIÓN</span>
+                        <h3>Tornillo</h3>
+                        <p>
+                            Opción para distintos trabajos de construcción y carpintería, 
+                            según las medidas requeridas.
+                        </p>
+                        <button class="btn dark choose" data-type="Tornillo">Cotizar Tornillo</button>
+                    </div>
+                </article>
+                <article class="product">
+                    <div class="wood w2"></div>
+                    <div class="product-body">
+                        <span class="tag">CARPINTERÍA</span>
+                        <h3>Cedro</h3>
+                        <p>
+                            Madera utilizada en trabajos de carpintería, 
+                            mobiliario y acabados.
+                        </p>
+                        <button class="btn dark choose" data-type="Cedro">Cotizar Cedro</button>
+                    </div>
+                </article>
+                <article class="product">
+                    <div class="wood w3"></div>
+                    <div class="product-body">
+                        <span class="tag">CONSULTAR STOCK</span>
+                        <h3>Nogal</h3>
+                        <p>
+                            Consulta disponibilidad, dimensiones, 
+                            calidad y presentación para tu proyecto.
+                        </p>
+                        <button class="btn dark choose" data-type="Nogal">Cotizar Nogal</button>
+                    </div>
+                </article>
+                <article class="product">
+                    <div class="wood w4"></div>
+                    <div class="product-body">
+                        <span class="tag">ACABADOS</span>
+                        <h3>Caoba</h3>
+                        <p>
+                            Consulta si hay stock y solicita las medidas necesarias para tu pedido.
+                        </p>
+                        <button class="btn dark choose" data-type="Caoba">Cotizar Caoba</button>
+                    </div>
+                </article>
+                <article class="product">
+                    <div class="wood w5"></div>
+                    <div class="product-body">
+                        <span class="tag">PEDIDOS A MEDIDA</span>
+                        <h3>Tablas y tablones</h3>
+                        <p>
+                            Indica espesor, ancho, largo y 
+                            cantidad de piezas para una cotización más precisa.
+                        </p>
+                        <button class="btn dark choose" data-type="Tablas y tablones">Cotizar tablas</button>
+                    </div>
+                </article>
+                <article class="product">
+                    <div class="wood w6"></div>
+                    <div class="product-body">
+                        <span class="tag">OTRAS ESPECIES</span>
+                        <h3>Otra madera</h3>
+                        <p>¿Buscas otra especie o un corte específico? Cuéntanos qué necesitas.</p>
+                        <button class="btn dark choose" data-type="Otra madera">Consultar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section alt" id="nosotros">
+            <div class="section-head">
+                <div class="eyebrow">Sobre nosotros</div>
+                <h2>Atención pensada para tu proyecto</h2>
+                <p>
+                    En Maderera Guzmán F y H queremos ayudarte a identificar la madera 
+                    y las dimensiones adecuadas para tu necesidad. 
+                    Solicita información antes de confirmar tu compra.
+                </p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="symbol">🪵</div>
+                    <h3>Variedad para consultar</h3>
+                    <p>
+                        Consulta por especie, presentación, medidas y disponibilidad actual.
+                    </p>
+                </div>
+                <div class="feature">
+                    <div class="symbol">📐</div>
+                    <h3>Pedido personalizado</h3>
+                    <p>
+                        Describe tu proyecto y registra las dimensiones para que podamos revisarlas.
+                    </p>
+                </div>
+                <div class="feature">
+                    <div class="symbol">🤝</div>
+                    <h3>Cotización clara</h3>
+                    <p>
+                        Revisamos tu solicitud y confirmamos precio, stock, entrega y condiciones.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="cotizar">
+            <div class="section-head">
+                <div class="eyebrow">Cotización personalizada</div>
+                <h2>Cuéntanos qué madera necesitas</h2>
+                <p>
+                    Completa los datos y prepara un mensaje de solicitud de cotización. 
+                    Los precios no se calculan automáticamente porque dependen del stock y las especificaciones.
+                </p>
+            </div>
+            <div class="quote-wrap">
+                <aside class="quote-info">
+                    <h3>Tu cotización, paso a paso</h3>
+                    <p>
+                        Mientras más detalles compartas, más fácil será revisar tu pedido.
+                    </p>
+                    <ul>
+                        <li>Tipo de madera y producto</li>
+                        <li>Medidas en centímetros o metros</li>
+                        <li>Cantidad de piezas o volumen</li>
+                        <li>Distrito o lugar de entrega</li>
+                        <li>Fecha aproximada en que lo necesitas</li>
+                    </ul>
+                    <p>
+                        <b>Importante:</b> 
+                        la solicitud no confirma una compra. La empresa debe validar disponibilidad y precio.
+                    </p>
+                </aside>
+                <form class="form" id="quoteForm">
+                    <h3>Formulario de cotización</h3>
+                    <p class="form-intro">Los campos con * son obligatorios.</p>
+                    <div class="fields">
+                        <div class="field">
+                            <label for="nombre">Nombre completo *</label>
+                            <input id="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="field">
+                            <label for="telefono">Teléfono / WhatsApp *</label>
+                            <input id="telefono" required inputmode="tel" placeholder="Tu número de contacto">
+                        </div>
+                        <div class="field">
+                            <label for="tipo">Tipo de madera *</label>
+                            <select id="tipo" required>
+                                <option value="">Selecciona una opción</option>
+                                <option>Tornillo</option>
+                                <option>Cedro</option>
+                                <option>Nogal</option>
+                                <option>Caoba</option>
+                                <option>Tablas y tablones</option>
+                                <option>Otra madera</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="producto">Producto / presentación *</label>
+                            <select id="producto" required>
+                                <option value="">Selecciona</option>
+                                <option>Tabla</option>
+                                <option>Tablón</option>
+                                <option>Viga</option>
+                                <option>Listón</option>
+                                <option>Cuartón</option>
+                                <option>Triplay / tablero</option>
+                                <option>Otro / por consultar</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="largo">Largo (m)</label>
+                            <input id="largo" type="number" min="0" step="0.01" placeholder="Ej. 2.40">
+                        </div>
+                        <div class="field">
+                            <label for="ancho">Ancho (cm)</label>
+                            <input id="ancho" type="number" min="0" step="0.1" placeholder="Ej. 20">
+                        </div>
+                        <div class="field">
+                            <label for="espesor">Espesor (cm)</label>
+                            <input id="espesor" type="number" min="0" step="0.1" placeholder="Ej. 2.5">
+                        </div>
+                        <div class="field">
+                            <label for="cantidad">Cantidad de piezas *</label>
+                            <input id="cantidad" type="number" min="1" step="1" required placeholder="Ej. 30">
+                        </div>
+                        <div class="field">
+                            <label for="calidad">Calidad / selección</label>
+                            <select id="calidad">
+                                <option>Deseo asesoría</option>
+                                <option>Primera</option>
+                                <option>Segunda</option>
+                                <option>Uso estructural (validar especificación)</option>
+                                <option>Acabado / carpintería</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="entrega">¿Cómo lo necesitas?</label>
+                            <select id="entrega">
+                                <option>Recojo en tienda</option>
+                                <option>Consultar envío</option>
+                                <option>Entrega a domicilio</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label for="lugar">Distrito o dirección de entrega</label>
+                            <input id="lugar" placeholder="Ej. Huancayo, Junín">
+                        </div>
+                        <div class="field full">
+                            <label for="detalle">Detalles adicionales</label>
+                            <textarea 
+                                id="detalle" 
+                                placeholder="Cuéntanos el uso, fecha requerida, cortes especiales u otra especificación."
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="estimate" id="estimate">
+                        <strong>Volumen estimado: —</strong>
+                        Completa largo, ancho, espesor y cantidad para estimar el volumen en m³. 
+                        Es una referencia, no un precio.
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn dark">Preparar solicitud por WhatsApp</button>
+                        <button type="button" id="copyBtn" class="btn">Copiar solicitud</button>
+                    </div>
+                    <p class="form-note">
+                        La cotización es manual: la empresa confirmará precio y stock por WhatsApp. 
+                        Antes de publicar, configura el número oficial y completa los datos de contacto. 
+                        Este sitio no guarda pedidos en una base de datos.
+                    </p>
+                </form>
+            </div>
+        </section>
+        <section class="section alt" id="contacto">
+            <div class="section-head">
+                <div class="eyebrow">Contacto</div>
+                <h2>Estamos listos para atender tu consulta</h2>
+                <p>
+                    Actualiza los datos de contacto antes de publicar
+                    la web para que tus clientes puedan comunicarse contigo.
+                </p>
+            </div>
+            <div class="contact">
+                <div class="contact-card">
+                    <h3>📱 WhatsApp y llamadas</h3>
+                    <p>Pendiente: número oficial de WhatsApp y llamadas.</p>
+                    <b>Atención:</b> 
+                    consulta horarios y disponibilidad.
+                </div>
+                <div class="contact-card">
+                    <h3>📍 Ubicación y horarios</h3>
+                    <p>
+                        Pendiente: dirección exacta, 
+                        horario de atención y referencia para llegar.
+                    </p>
+                    <b>Zona de atención:</b> 
+                    actualizar según cobertura real.
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div>
+                <b>MADERERA GUZMÁN F y H</b>
+                <br>
+                <small>Madera para tus proyectos de construcción y carpintería.</small>
+            </div>
+            <div>
+                Catálogo · Cotizaciones · Atención al cliente
+                <br>
+                <small>© 2026 Maderera Guzmán F y H. Todos los derechos reservados.</small>
+            </div>
+        </footer>
+    <script>
+        const typeSelect=document.getElementById( 'tipo' );
+
+        document.querySelectorAll( '.choose' ).forEach(
+            b=>b.addEventListener(
+                'click',( )=>{
+
+                    typeSelect.value=b.dataset.type;
+                    document.getElementById('cotizar').scrollIntoView({behavior:'smooth'});
+                    typeSelect.focus()
+
+                }
+            )
+        );
+
+        const ids=['largo','ancho','espesor','cantidad'];
+        function updateVolume(){
+            const L=parseFloat(document.getElementById('largo').value),
+            A=parseFloat(document.getElementById('ancho').value),
+            E=parseFloat(document.getElementById('espesor').value),
+            Q=parseFloat(document.getElementById('cantidad').value);
+
+            const valid=[L,A,E,Q].every(
+                v=>Number.isFinite(v) && v > 0
+            );
+
+            document.getElementById('estimate').innerHTML=valid?
+                '<strong>Volumen estimado: '+((L*(A/100)*(E/100)*Q).toFixed(4))+
+                ' m³</strong>Estimación matemática según las medidas ingresadas; confirmar medidas comerciales y cortes. No es una cotización de precio.':
+                '<strong>Volumen estimado: —</strong>Completa largo, ancho, espesor y cantidad para estimar el volumen en m³. Es una referencia, no un precio.'
+        }
+        
+        ids.forEach(id=>document.getElementById(id).addEventListener(
+            'input',updateVolume
+        ));
+
+        function getMessage(){
+            const v=id=>document.getElementById(id).value.trim()||'No especificado';
+            return 
+                `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n
+                Nombre: ${v('nombre')}\n
+                Teléfono: ${v('telefono')}\n
+                Tipo de madera: ${v('tipo')}\n
+                Producto: ${v('producto')}\n
+                Medidas: 
+                    largo ${v('largo')} m; 
+                    ancho ${v('ancho')} cm; 
+                    espesor ${v('espesor')} 
+                    cm\nCantidad: ${v('cantidad')} 
+                    piezas\nCalidad/selección: ${v('calidad')}\n
+                Entrega: ${v('entrega')}\n
+                Lugar: ${v('lugar')}\n
+                Detalles: ${v('detalle')}\n\n
+                Solicito confirmar disponibilidad, precio y condiciones de entrega.`
+        }
+        
+        document.getElementById('quoteForm').addEventListener('submit',e=>{
+            e.preventDefault();
+            const msg=encodeURIComponent(getMessage());
+            const WHATSAPP_NUMBER='COLOCA_AQUI_EL_NUMERO';
+            if(!/^\d{10,15}$/.test(WHATSAPP_NUMBER)){
+
+                alert(
+                    'Falta configurar el WhatsApp oficial de Maderera Guzmán F y H.' + 
+                    ' En el código, reemplaza COLOCA_AQUI_EL_NUMERO por el número completo con código de país,'+ 
+                    ' solo dígitos y sin + ni espacios.'
+                );
+
+                return 
+            }
+            window.open(
+                    'https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank'
+            )});
+            
+            document.getElementById('copyBtn').addEventListener(
+                'click',async()=>{
+                    try{
+                        await navigator.clipboard.writeText(getMessage());
+                        alert('Solicitud copiada. Ya puedes pegarla en WhatsApp o en un correo.')
+                    }
+                    catch(e){
+                        prompt('Copia tu solicitud:',getMessage()
+                        )
+                    }
+                }
+            );
+</script>
+</body>
+</html>
