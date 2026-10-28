@@ -51,12 +51,13 @@ a{
 .logo{
     width:44px;
     height:44px;
+    padding: 4px;
     border-radius:10px;
     background:var(--forest);
     color:#f5d9a3;
     display:grid;
     place-items:center;
-    font-size:14px;
+    font-size:12px;
     letter-spacing:-1px
 }
 .brand small{
@@ -83,13 +84,13 @@ a{
     border:0;
     border-radius:6px;
     padding:12px 18px;
-    font-weight:800;
+    font-weight:600;
     cursor:pointer;
     font-size:14px
 }
 .btn.dark{
-    background:var(--forest);
-    color:#fff
+    background:var(--green);
+    color:#fff;
 }
 .hero{
     background:linear-gradient(100deg,rgba(12,39,26,.93),rgba(18,49,34,.78)),
@@ -291,9 +292,16 @@ h2{font-size:clamp(28px,3vw,40px);
 .quote-info p{
     color:#dce7dd
 }
-.quote-info li{
-    margin:10px 0;
-    color:#eaf0e9
+.quote-info ul {
+    padding-left: 18px;
+    margin: 16px 0;
+}
+
+.quote-info li {
+    margin: 12px 0;
+    color: #eaf0e9;
+    font-size: 14px;
+    line-height: 1.4;
 }
 .form{
     background:#fff;
@@ -396,6 +404,33 @@ footer small{
 .mobile-menu{
     display:none
 }
+.img-wood{
+    width: 100%;
+    height: 150px;
+    object-fit: cover; 
+}
+.button-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    
+}
+.button-white{
+    background:transparent;
+    border:1px solid var(--green);
+    color:var(--green);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.button-white:hover{
+    border:1px solid #23750f;
+    color:#23750f;
+}
+.btn.dark:hover{
+    background: #23750f;
+}
 @media(max-width:800px){
     .navlinks{
         display:none
@@ -404,8 +439,8 @@ footer small{
         grid-template-columns:1fr;
         padding-top:52px
     }
-    .grid,.feature-grid{
-        grid-template-columns:repeat(2,1fr)
+    .grid,.feature-grid,.fields{
+            grid-template-columns:1fr
     }
     .quote-wrap{
         grid-template-columns:1fr
@@ -415,11 +450,12 @@ footer small{
     }
     .contact{
         grid-template-columns:1fr
-    }}
-@media(max-width:520px){
-    .grid,.feature-grid,.fields{
-            grid-template-columns:1fr
     }
+    .button-grid{
+    gap: 16px;
+    }
+}
+@media(max-width:520px){
     .field.full{
         grid-column:auto
     }

@@ -1,0 +1,173 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Información de Madera | Maderera Guzmán F y H</title>
+    <link rel="stylesheet" href="Frontstyles.css">
+    <style>
+        .info-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 32px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--green);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .work-list {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+        .work-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .info-header {
+            border-bottom: 2px solid var(--line);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a class="brand" href="FRONTPAGE.html">
+            <span class="logo">G<span style="color:#fff">&</span>H</span>
+            <span>MADERERA GUZMÁN F y H<small>CALIDAD · CONFIANZA · ATENCION</small></span>
+        </a>
+        <a class="btn dark" href="FRONTPAGE.html#cotizar">Solicitar cotización</a>
+    </nav>
+
+    <main class="section alt">
+        <div class="info-container">
+            <a href="FRONTPAGE.html#catalogo" class="back-link">← Volver al catálogo</a>
+
+            <div class="info-header">
+                <span class="tag" id="maderaTag">CARGANDO...</span>
+                <h1 id="maderaTitulo" style="color: var(--forest); margin: 10px 0;">Seleccione una madera</h1>
+                <p id="maderaDescripcion" style="color: var(--muted); font-size: 16px;"></p>
+            </div>
+
+            <section>
+                <h2 style="font-size: 22px;">Trabajos y aplicaciones recomendadas</h2>
+                <p>De acuerdo a sus propiedades físicas y mecánicas, este tipo de madera se utiliza principalmente para:</p>
+                <ul class="work-list" id="maderaTrabajos">
+                    <!-- Contenido dinámico -->
+                </ul>
+            </section>
+
+            <div style="margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; gap: 14px; flex-wrap: wrap;">
+                <a id="btnCotizarMadera" href="FRONTPAGE.html#cotizar" class="btn dark">Cotizar esta madera</a>
+                <a href="FRONTPAGE.html#catalogo" class="btn outline" style="color: var(--ink); border-color: var(--muted);">Ver otros tipos de madera</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <b>MADERERA GUZMÁN F y H</b><br>
+            <small>Madera para tus proyectos de construcción y carpintería.</small>
+        </div>
+        <div>
+            <small>© 2026 Maderera Guzmán F y H. Todos los derechos reservados.</small>
+        </div>
+    </footer>
+
+    <script>
+        // Base de datos de maderas y tipos de trabajos según los <div class="tag">
+        const detallesMaderas = {
+            "Tornillo": {
+                tag: "CONSTRUCCIÓN - CARPINTERÍA",
+                descripcion: "Madera estructural pesada de alta durabilidad y excelente relación calidad-precio.",
+                trabajos: [
+                    "<strong>Estructuras y encofrados:</strong> Columnas, vigas, viguetas y tijerales para edificación.",
+                    "<strong>Carpintería en general:</strong> Marcos de puertas, ventanas, portones y escaleras.",
+                    "<strong>Pisos y cubiertas:</strong> Maquinado para pisos de madera y cubiertas expuestas a uso continuo.",
+                    "<strong>Mueblería pesada:</strong> Mesas, bancas de trabajo y estructuras de soporte."
+                ]
+            },
+            "Cedro": {
+                tag: "CARPINTERÍA",
+                descripcion: "Madera fina muy valorada por su estabilidad dimensional, aroma y belleza estética.",
+                trabajos: [
+                    "<strong>Carpintería fina y residencial:</strong> Puertas principales, portones tallados y ventanas.",
+                    "<strong>Mueblería de interiores y exteriores:</strong> Repisas, armarios, juegos de comedor y gabinetes.",
+                    "<strong>Revestimientos y molduras:</strong> Zócalos, marcos decorativos y paneles de pared.",
+                    "<strong>Trabajos expuestos a humedad:</strong> Gracias a sus aceites naturales, es ideal para zonas exteriores o baños."
+                ]
+            },
+            "Nogal": {
+                tag: "CARPINTERÍA - ACABADOS",
+                descripcion: "Madera noble de tono oscuro caracterizada por su gran elegancia, acabado y dureza.",
+                trabajos: [
+                    "<strong>Ebanistería fina:</strong> Muebles ejecutivos, mesas de centro y piezas de diseño exclusivo.",
+                    "<strong>Acabados arquitectónicos:</strong> Revestimiento decorativo de paredes y cielorrasos elegantes.",
+                    "<strong>Pisos de lujo:</strong> Parquet y listones para pisos de alta gama.",
+                    "<strong>Elementos decorativos:</strong> Tallados artesanos, mangos decorativos y tornería."
+                ]
+            },
+            "Eucalipto": {
+                tag: "CONSTRUCCIÓN",
+                descripcion: "Madera densa y de alta resistencia mecánica, apta para soportar grandes cargas e intemperie.",
+                trabajos: [
+                    "<strong>Construcción pesada:</strong> Postes de tendido, puntales para minería y soportes estructurales.",
+                    "<strong>Estructuras exteriores:</strong> Pérgolas, cercos periféricos, puentes rústicos y durmientes.",
+                    "<strong>Obra civil:</strong> Encofrados pesados y andamiaje rígido.",
+                    "<strong>Pisones y durmientes:</strong> Áreas con fricción o constante soporte de peso."
+                ]
+            },
+            "Cumala": {
+                tag: "CARPINTERÍA - TRIPLEY Y CHAPAS",
+                descripcion: "Madera de peso liviano a moderado, caracterizada por su fácil maquinado y superficie dócil.",
+                trabajos: [
+                    "<strong>Fabricación de triplay y tableros:</strong> Chapas desenrolladas para contrachapados.",
+                    "<strong>Cajonería y estructuras ligeras:</strong> Fondos de cajón, interiores de roperos y divisiones.",
+                    "<strong>Carpintería comercial:</strong> Mueblería de peso ligero, bastidores y embalajes.",
+                    "<strong>Modelos y moldes:</strong> Piezas cortadas con precisión para ensambles de carpintería."
+                ]
+            },
+            "Tulpay": {
+                tag: "CONSTRUCCIÓN - CARPINTERÍA",
+                descripcion: "Madera versátil con alta inmunidad natural contra hongos e insectos xilófagos.",
+                trabajos: [
+                    "<strong>Estructuras secundarias de obra:</strong> Viguetas, listones de listonado y tabiquería.",
+                    "<strong>Carpintería auxiliar:</strong> Bastidores para puertas contraplacadas y marcos secundarios.",
+                    "<strong>Vigas y tijerales ligeros:</strong> Coberturas de techos residenciales y almacenes.",
+                    "<strong>Mueblería utilitaria:</strong> Estanterías, pallets y bancas de servicio."
+                ]
+            }
+        };
+
+        // Obtener la madera de la URL
+        const params = new URLSearchParams(window.location.search);
+        const maderaSeleccionada = params.get('madera');
+
+        const info = detallesMaderas[maderaSeleccionada] || {
+            tag: "CONSULTAR DISPONIBILIDAD",
+            descripcion: "Madera catalogada para proyectos generales de carpintería o construcción.",
+            trabajos: ["Consulte directamente con nuestro equipo técnico para recomendaciones de uso."]
+        };
+
+        // Renderizar datos en la página
+        document.getElementById('maderaTag').textContent = info.tag;
+        document.getElementById('maderaTitulo').textContent = maderaSeleccionada || "Madera no especificada";
+        document.getElementById('maderaDescripcion').textContent = info.descripcion;
+
+        const trabajosList = document.getElementById('maderaTrabajos');
+        trabajosList.innerHTML = info.trabajos.map(item => `<li>${item}</li>`).join('');
+    </script>
+</body>
+</html>

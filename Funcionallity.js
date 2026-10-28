@@ -1,85 +1,130 @@
 
-const typeSelect=document.getElementById( 'tipo' );
 
-document.querySelectorAll( '.choose' ).forEach(
-    b=>b.addEventListener(
-        'click',( )=>{
+const CONFIG = {
+    // Reemplaza estas 3 claves con los datos obtenidos en el Paso 1:
+    emailjsPublicKey: 'XMdtUXA4EP02Xxtba',
+    emailjsServiceId: 'service_gqvv85l',
+    emailjsTemplateId: 'template_1d75ikm',
 
-            typeSelect.value=b.dataset.type;
-            document.getElementById('cotizar').scrollIntoView({behavior:'smooth'});
-            typeSelect.focus()
-
-        }
-    )
-);
-
-const ids=['largo','ancho','espesor','cantidad'];
-function updateVolume(){
-    const L=parseFloat(document.getElementById('largo').value),
-    A=parseFloat(document.getElementById('ancho').value),
-    E=parseFloat(document.getElementById('espesor').value),
-    Q=parseFloat(document.getElementById('cantidad').value);
-
-    const valid=[L,A,E,Q].every(
-        v=>Number.isFinite(v) && v > 0
-    );
-
-    document.getElementById('estimate').innerHTML=valid?
-        '<strong>Volumen estimado: '+((L*(A/100)*(E/100)*Q).toFixed(4))+
-        ' m³</strong>Estimación matemática según las medidas ingresadas; confirmar medidas comerciales y cortes. No es una cotización de precio.':
-        '<strong>Volumen estimado: —</strong>Completa largo, ancho, espesor y cantidad para estimar el volumen en m³. Es una referencia, no un precio.'
-}
-
-ids.forEach(id=>document.getElementById(id).addEventListener(
-    'input',updateVolume
-));
-
-function getMessage(){
-    const v=id=>document.getElementById(id).value.trim()||'No especificado';
-    return `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n
-        Nombre: ${v('nombre')}\n
-        Teléfono: ${v('telefono')}\n
-        Tipo de madera: ${v('tipo')}\n
-        Producto: ${v('producto')}\n
-        Medidas: 
-            largo ${v('largo')} m; 
-            ancho ${v('ancho')} cm; 
-            espesor ${v('espesor')} 
-            cm\nCantidad: ${v('cantidad')} 
-            piezas\nCalidad/selección: ${v('calidad')}\n
-        Entrega: ${v('entrega')}\n
-        Lugar: ${v('lugar')}\n
-        Detalles: ${v('detalle')}\n\n
-        Solicito confirmar disponibilidad, precio y condiciones de entrega.`
-}
-
-document.getElementById('quoteForm').addEventListener('submit',e=>{
-    e.preventDefault();
-    const msg=encodeURIComponent(getMessage());
-    const WHATSAPP_NUMBER='COLOCA_AQUI_EL_NUMERO';
-    if(!/^\d{10,15}$/.test(WHATSAPP_NUMBER)){
-
-        alert(
-            'Falta configurar el WhatsApp oficial de Maderera Guzmán F y H.' + 
-            ' En el código, reemplaza COLOCA_AQUI_EL_NUMERO por el número completo con código de país,'+ 
-            ' solo dígitos y sin + ni espacios.'
-        );
-
-        return 
-    }
-    window.open(
-            'https://wa.me/'+WHATSAPP_NUMBER+'?text='+msg,'_blank'
-    )});
     
-    document.getElementById('copyBtn').addEventListener(
-        'click',async()=>{
-            try{
-                await navigator.clipboard.writeText(getMessage());
-                alert('Solicitud copiada. Ya puedes pegarla en WhatsApp o en un correo.')
-            }
-            catch(e){
-                prompt('Copia tu solicitud:',getMessage()
-                )
-            }
+    whatsappNumber: '51995041554'
+};
+
+// Inicializar el SDK de EmailJS
+(function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(CONFIG.emailjsPublicKey);
+    }
+})();
+
+
+// REFERENCIAS Y EVENTOS DOM
+
+const medioContactoSelect = document.getElementById('medioContacto');
+const submitBtn = document.getElementById('submitBtn');
+const detalleInput = document.getElementById('detalle');
+const quoteForm = document.getElementById('quoteForm');
+
+// Cambiar dinámicamente el texto del botón
+if (medioContactoSelect && submitBtn) {
+    medioContactoSelect.addEventListener('change', () => {
+        submitBtn.textContent = medioContactoSelect.value === 'whatsapp' 
+            ? 'Enviar por WhatsApp' 
+            : 'Enviar por Gmail';
+    });
+}
+
+// Acción de los botones "Cotiza" e "Información" del catálogo
+document.querySelectorAll('.choose').forEach(button => {
+    button.addEventListener('click', () => {
+        const maderaType = button.dataset.type || 'Madera seleccionada';
+        if (detalleInput) {
+            detalleInput.value = `Hola, me interesa solicitar cotización sobre la madera: ${maderaType}.`;
+            document.getElementById('cotizar').scrollIntoView({ behavior: 'smooth' });
+            detalleInput.focus();
         }
-    );
+    });
+});
+
+document.querySelectorAll('.info').forEach(button => {
+    button.addEventListener('click', () => {
+        const madera = button.dataset.type;
+        if (madera) {
+            window.location.href = `informacion.html?madera=${encodeURIComponent(madera)}`;
+        }
+    });
+});
+
+//
+// ENVÍO AUTOMÁTICO DEL FORMULARIO
+// 
+if (quoteForm) {
+    quoteForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const canal = medioContactoSelect.value;
+        const nombre = document.getElementById('nombre').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const ubicacion = document.getElementById('ubicacion').value.trim() || 'No especificada';
+        const detalle = document.getElementById('detalle').value.trim() || 'Sin detalles adicionales';
+
+        if (canal === 'gmail') {
+            // ENVÍO AUTOMÁTICO VÍA EMAILJS
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando correo...';
+
+            const templateParams = {
+                nombre: nombre,
+                telefono: telefono,
+                email: email,
+                ubicacion: ubicacion,
+                detalle: detalle
+            };
+
+            try {
+                await emailjs.send(CONFIG.emailjsServiceId, CONFIG.emailjsTemplateId, templateParams);
+                alert('¡Solicitud enviada con éxito! Nos pondremos en contacto contigo a la brevedad.');
+                quoteForm.reset();
+            } catch (error) {
+                console.error('Error al enviar correo con EmailJS:', error);
+                alert('Ocurrió un error al enviar el correo. Inténtalo nuevamente o selecciona WhatsApp.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar por Gmail';
+            }
+
+        } else if (canal === 'whatsapp') {
+            // ENVÍO VÍA REDIRECCIÓN A WHATSAPP
+            const mensajeWa = `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n` +
+                              `Nombre: ${nombre}\n` +
+                              `Teléfono: ${telefono}\n` +
+                              `Correo: ${email}\n` +
+                              `Ubicación: ${ubicacion}\n` +
+                              `Detalle: ${detalle}`;
+
+            const urlWa = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(mensajeWa)}`;
+            window.open(urlWa, '_blank');
+        }
+    });
+}
+
+// Botón para copiar el contenido
+const copyBtn = document.getElementById('copyBtn');
+if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+        const v = id => document.getElementById(id)?.value.trim() || 'No especificado';
+        const texto = `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n` +
+                      `Nombre: ${v('nombre')}\n` +
+                      `Teléfono: ${v('telefono')}\n` +
+                      `Correo: ${v('email')}\n` +
+                      `Ubicación: ${v('ubicacion')}\n` +
+                      `Detalle: ${v('detalle')}`;
+        try {
+            await navigator.clipboard.writeText(texto);
+            alert('Datos copiados al portapapeles.');
+        } catch (e) {
+            prompt('Copia tu solicitud:', texto);
+        }
+    });
+}
