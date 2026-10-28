@@ -1,51 +1,61 @@
 
+// CONFIGURACIÓN DE EMAILJS
 
-const CONFIG = {
-    // Reemplaza estas 3 claves con los datos obtenidos en el Paso 1:
-    emailjsPublicKey: 'XMdtUXA4EP02Xxtba',
-    emailjsServiceId: 'service_gqvv85l',
-    emailjsTemplateId: 'template_1d75ikm',
-
-    
-    whatsappNumber: '51995041554'
+const CONFIG_EMAILJS = {
+    publicKey: 'XMdtUXA4EP02Xxtba',   // 
+    serviceId: 'service_gqvv85l',   // 
+    templateId: 'template_1d75ikm'  // 
 };
 
-// Inicializar el SDK de EmailJS
+// Inicializar EmailJS si el SDK se cargó correctamente en el HTML
 (function() {
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init(CONFIG.emailjsPublicKey);
+    if (typeof emailjs !== 'undefined' && CONFIG_EMAILJS.publicKey !== 'XMdtUXA4EP02Xxtba') {
+        emailjs.init(CONFIG_EMAILJS.publicKey);
     }
 })();
 
 
-// REFERENCIAS Y EVENTOS DOM
+// OBTENER REFERENCIAS AL DOM
 
 const medioContactoSelect = document.getElementById('medioContacto');
 const submitBtn = document.getElementById('submitBtn');
-const detalleInput = document.getElementById('detalle');
 const quoteForm = document.getElementById('quoteForm');
+const detalleInput = document.getElementById('detalle');
+const copyBtn = document.getElementById('copyBtn');
 
-// Cambiar dinámicamente el texto del botón
+
+// CAMBIAR TEXTO DEL BOTÓN SEGÚN CANAL
+
 if (medioContactoSelect && submitBtn) {
     medioContactoSelect.addEventListener('change', () => {
-        submitBtn.textContent = medioContactoSelect.value === 'whatsapp' 
-            ? 'Enviar por WhatsApp' 
-            : 'Enviar por Gmail';
+        if (medioContactoSelect.value === 'whatsapp') {
+            submitBtn.textContent = 'Enviar por WhatsApp';
+        } else {
+            submitBtn.textContent = 'Enviar por Gmail';
+        }
     });
 }
 
-// Acción de los botones "Cotiza" e "Información" del catálogo
+
+//  ACCIONES DE BOTONES EN EL CATÁLOGO
+
+
+// Botón Cotiza Escribe el nombre de la madera en la consulta, desplaza la pantalla y enfoca el campo.
 document.querySelectorAll('.choose').forEach(button => {
     button.addEventListener('click', () => {
         const maderaType = button.dataset.type || 'Madera seleccionada';
         if (detalleInput) {
-            detalleInput.value = `Hola, me interesa solicitar cotización sobre la madera: ${maderaType}.`;
-            document.getElementById('cotizar').scrollIntoView({ behavior: 'smooth' });
+            detalleInput.value = `Hola, me interesa solicitar cotización e información sobre la madera: ${maderaType}.`;
+            const cotizarSection = document.getElementById('cotizar');
+            if (cotizarSection) {
+                cotizarSection.scrollIntoView({ behavior: 'smooth' });
+            }
             detalleInput.focus();
         }
     });
 });
 
+// Botón Información Redirige a la página de detalles pasando el parámetro de la madera.
 document.querySelectorAll('.info').forEach(button => {
     button.addEventListener('click', () => {
         const madera = button.dataset.type;
@@ -55,62 +65,78 @@ document.querySelectorAll('.info').forEach(button => {
     });
 });
 
-//
-// ENVÍO AUTOMÁTICO DEL FORMULARIO
-// 
+
+// ENVÍO DEL FORMULARIO (WHATSAPP / GMAIL)
 if (quoteForm) {
     quoteForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const canal = medioContactoSelect.value;
-        const nombre = document.getElementById('nombre').value.trim();
-        const telefono = document.getElementById('telefono').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const ubicacion = document.getElementById('ubicacion').value.trim() || 'No especificada';
-        const detalle = document.getElementById('detalle').value.trim() || 'Sin detalles adicionales';
+        const canal = medioContactoSelect ? medioContactoSelect.value : 'whatsapp';
+        const nombre = document.getElementById('nombre')?.value.trim() || '';
+        const telefono = document.getElementById('telefono')?.value.trim() || '';
+        const email = document.getElementById('email')?.value.trim() || '';
+        const ubicacion = document.getElementById('ubicacion')?.value.trim() || 'No especificada';
+        const detalle = document.getElementById('detalle')?.value.trim() || 'Sin detalles adicionales';
 
-        if (canal === 'gmail') {
-            // ENVÍO AUTOMÁTICO VÍA EMAILJS
+        // WHATSAPP VÍA VERCEL 
+        if (canal === 'whatsapp') {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando WhatsApp...';
+
+            try {
+                const response = await fetch('/api/whatsapp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, telefono, ubicacion, detalle })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    alert('¡Solicitud enviada con éxito por WhatsApp!');
+                    quoteForm.reset();
+                } else {
+                    throw new Error(result.message || 'Error al procesar el envío por WhatsApp');
+                }
+            } catch (error) {
+                console.error('Error WhatsApp:', error);
+                alert('No se pudo enviar el mensaje por WhatsApp. Inténtalo nuevamente o prueba la opción de Gmail.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar por WhatsApp';
+            }
+
+        // GMAIL VÍA 
+        } else if (canal === 'gmail') {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando correo...';
 
-            const templateParams = {
-                nombre: nombre,
-                telefono: telefono,
-                email: email,
-                ubicacion: ubicacion,
-                detalle: detalle
-            };
-
             try {
-                await emailjs.send(CONFIG.emailjsServiceId, CONFIG.emailjsTemplateId, templateParams);
-                alert('¡Solicitud enviada con éxito! Nos pondremos en contacto contigo a la brevedad.');
+                if (typeof emailjs === 'undefined' || CONFIG_EMAILJS.publicKey === 'TU_PUBLIC_KEY_EMAILJS') {
+                    throw new Error('EmailJS no está configurado. Revisa las credenciales en Funcionallity.js.');
+                }
+
+                await emailjs.send(
+                    CONFIG_EMAILJS.serviceId, 
+                    CONFIG_EMAILJS.templateId, 
+                    { nombre, telefono, email, ubicacion, detalle }
+                );
+
+                alert('¡Correo enviado con éxito! Nos comunicaremos contigo pronto.');
                 quoteForm.reset();
-            } catch (error) {
-                console.error('Error al enviar correo con EmailJS:', error);
-                alert('Ocurrió un error al enviar el correo. Inténtalo nuevamente o selecciona WhatsApp.');
+            } catch (err) {
+                console.error('Error EmailJS:', err);
+                alert('Ocurrió un error al enviar el correo automático. Verifica la configuración de EmailJS.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar por Gmail';
             }
-
-        } else if (canal === 'whatsapp') {
-            // ENVÍO VÍA REDIRECCIÓN A WHATSAPP
-            const mensajeWa = `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n` +
-                              `Nombre: ${nombre}\n` +
-                              `Teléfono: ${telefono}\n` +
-                              `Correo: ${email}\n` +
-                              `Ubicación: ${ubicacion}\n` +
-                              `Detalle: ${detalle}`;
-
-            const urlWa = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(mensajeWa)}`;
-            window.open(urlWa, '_blank');
         }
     });
 }
 
-// Botón para copiar el contenido
-const copyBtn = document.getElementById('copyBtn');
+
+// COPIAR DATOS DE LA SOLICITUD
 if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
         const v = id => document.getElementById(id)?.value.trim() || 'No especificado';
@@ -124,7 +150,7 @@ if (copyBtn) {
             await navigator.clipboard.writeText(texto);
             alert('Datos copiados al portapapeles.');
         } catch (e) {
-            prompt('Copia tu solicitud:', texto);
+            prompt('Copia tu solicitud manualmente:', texto);
         }
     });
 }
