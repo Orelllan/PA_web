@@ -1,10 +1,7 @@
 
-
 // CONFIGURACIÓN DE DATOS DE CONTACTO
-
 const CONFIG = {
     whatsappNumber: '51960835957',
-
     emailjsPublicKey: 'XMdtUXA4EP02Xxtba',   
     emailjsServiceId: 'service_gqvv85l',   
     emailjsTemplateId: 'template_1d75ikm'  
@@ -12,23 +9,19 @@ const CONFIG = {
 
 // Inicialización de EmailJS
 (function() {
-    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey !== 'XMdtUXA4EP02Xxtba') {
+    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey) {
         emailjs.init(CONFIG.emailjsPublicKey);
     }
 })();
 
-
 // ELEMENTOS DEL DOM
-
 const medioContactoSelect = document.getElementById('medioContacto');
 const submitBtn = document.getElementById('submitBtn');
 const quoteForm = document.getElementById('quoteForm');
 const detalleInput = document.getElementById('detalle');
 const copyBtn = document.getElementById('copyBtn');
 
-
 // CAMBIO DINÁMICO DE BOTÓN SEGÚN CANAL
-
 if (medioContactoSelect && submitBtn) {
     medioContactoSelect.addEventListener('change', () => {
         if (medioContactoSelect.value === 'whatsapp') {
@@ -39,11 +32,7 @@ if (medioContactoSelect && submitBtn) {
     });
 }
 
-
 // ACCIONES DE NAVEGACIÓN EN EL CATÁLOGO
-
-
-
 document.querySelectorAll('.choose').forEach(button => {
     button.addEventListener('click', () => {
         const maderaType = button.dataset.type || 'Madera seleccionada';
@@ -58,7 +47,6 @@ document.querySelectorAll('.choose').forEach(button => {
     });
 });
 
-
 document.querySelectorAll('.info').forEach(button => {
     button.addEventListener('click', () => {
         const madera = button.dataset.type;
@@ -68,9 +56,7 @@ document.querySelectorAll('.info').forEach(button => {
     });
 });
 
-
 // PROCESAMIENTO DEL FORMULARIO
-
 if (quoteForm) {
     quoteForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -84,10 +70,6 @@ if (quoteForm) {
         
         // WHATSAPP MANUAL 
         if (canal === 'whatsapp') {
-            if (CONFIG.whatsappNumber === '51987654321' || !CONFIG.whatsappNumber) {
-                alert('Atención: Reemplaza el número de teléfono en CONFIG.whatsappNumber dentro de Funcionallity.js.');
-            }
-
             const mensajeWa = `SOLICITUD DE COTIZACIÓN — MADERERA GUZMÁN F y H\n\n` +
                               `Nombre: ${nombre}\n` +
                               `Teléfono: ${telefono}\n` +
@@ -104,8 +86,8 @@ if (quoteForm) {
             submitBtn.textContent = 'Enviando correo...';
 
             try {
-                if (typeof emailjs === 'undefined' || CONFIG.emailjsPublicKey === 'TU_PUBLIC_KEY') {
-                    throw new Error('Configura tus claves de EmailJS en la constante CONFIG al inicio del archivo JS.');
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('La librería EmailJS no se ha cargado correctamente.');
                 }
 
                 await emailjs.send(
@@ -128,15 +110,13 @@ if (quoteForm) {
                 alert('No se pudo enviar el correo automático. Por favor verifica tus datos o selecciona la opción WhatsApp.');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar por Gmail (Automático)';
+                submitBtn.textContent = 'Enviar por Gmail';
             }
         }
     });
 }
 
-
 // BOTÓN AUXILIAR PARA COPIAR DATOS
-
 if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
         const v = id => document.getElementById(id)?.value.trim() || 'No especificado';
@@ -154,4 +134,3 @@ if (copyBtn) {
         }
     });
 }
-

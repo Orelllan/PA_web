@@ -1,318 +1,287 @@
+
 <!doctype html>
-    <html lang="es">
-        <head>
-            <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-            <title>Maderera Guzmán F y H | Catálogo y cotizaciones</title>
-            <link rel="stylesheet" href="Frontstyles.css">
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Maderera Guzmán F y H | Catálogo y cotizaciones</title>
+    <link rel="stylesheet" href="Frontstyles.css">
 
-            <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        </head>
-        <body>
+    <!-- SDK de EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
 
-        <div class="top">MADERA PARA TUS PROYECTOS · ATENCIÓN PERSONALIZADA · COTIZA SIN COMPROMISO</div>
+    <div class="top">MADERA PARA TUS PROYECTOS · ATENCIÓN PERSONALIZADA · COTIZA SIN COMPROMISO</div>
 
-        <nav class="nav">
-            <a class="brand" href="#inicio">
-                <span class="logo">G<span style="color:#fff">&</span>H</span>
-                <span>MADERERA GUZMÁN F y H<small>CALIDAD · CONFIANZA · ATENCION</small></span>
-            </a>
-            <div class="navlinks">
-                <a href="#catalogo">Catálogo</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#cotizar">Cotizar</a>
-                <a href="#contacto">Contacto</a>
-            </div>
-            <a class="btn dark" href="#cotizar">Solicitar cotización</a>
-        </nav>
+    <nav class="nav">
+        <a class="brand" href="#inicio">
+            <span class="logo">G<span style="color:#fff">&</span>H</span>
+            <span>MADERERA GUZMÁN F y H<small>CALIDAD · CONFIANZA · ATENCION</small></span>
+        </a>
+        <div class="navlinks">
+            <a href="#catalogo">Catálogo</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#cotizar">Cotizar</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <a class="btn dark" href="#cotizar">Solicitar cotización</a>
+    </nav>
 
-        <header class="hero" id="inicio">
-            <div>
-                <div class="eyebrow">Tu proyecto empieza con buena madera</div>
-                <h1>La madera adecuada, el trabajo adecuado.</h1>
-                <p>
-                    Encuentra opciones de madera para construcción, 
-                    carpintería y acabados. Elige el tipo, 
-                    indica las medidas y la cantidad que necesitas
-                    y solicita una cotización personalizada.
-                </p>
-                <div class="hero-actions">
-                    <a class="btn" href="#catalogo">Explorar maderas</a>
-                    <a class="btn outline" href="#cotizar">Cotizar mi pedido →</a>
-                </div>
-            </div>
-            <div class="hero-card">
-                <h3>¿Qué necesitas para tu proyecto?</h3>
-                <div class="quick">
-                    <span class="check">✓</span>
-                    <div>
-                        <b>Escoge el tipo de madera</b>
-                        <br>
-                        <small>Consulta las opciones disponibles.</small>
-                    </div>
-                </div>
-                <div class="quick">
-                    <span class="check">✓</span>
-                    <div>
-                        <b>Indica medidas y cantidad</b>
-                        <br>
-                        <small>Agrega largo, ancho, espesor o piezas.</small>
-                    </div>
-                </div>
-                <div class="quick">
-                    <span class="check">✓</span>
-                    <div>
-                        <b>Recibe una cotización</b>
-                        <br>
-                        <small>El precio final se confirma según disponibilidad y especificaciones.</small>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <section class="section" id="catalogo">
-            <div class="section-head">
-                <div class="eyebrow">Catálogo de productos</div>
-                <h2>Encuentra la madera que buscas</h2>
-                <p>
-                    Selecciona una opción para obter informacion.
-                </p>
-            </div>
-            <div class="grid">
-                <article class="product">
-                    <img src="./img/M_tornillo.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CONSTRUCCION - CARPINTERIA</div>
-                        <h3>Tornillo</h3>
-                        <p>Muy utilizado en la construcción y la carpintería debido a su buena relación calidad-precio.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Tornillo">Información</button>
-                            <button class="btn dark choose" data-type="Tornillo">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Cedro -->
-                <article class="product">
-                    <img src="./img/M_cedro.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CARPINTERIA</div>
-                        <h3>Cedro</h3>
-                        <p>Destaca por su ligereza, estabilidad y resistencia a la humedad e insectos.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Cedro">Información</button>
-                            <button class="btn dark choose" data-type="Cedro">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Nogal -->
-                <article class="product">
-                    <img src="./img/M_nogal.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CARPINTERIA - ACABADOS</div>
-                        <h3>Nogal</h3>
-                        <p>Destaca por su elegancia y resistencia en ebanistería fina.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Nogal">Información</button>
-                            <button class="btn dark choose" data-type="Nogal">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Eucalipto -->
-                <article class="product">
-                    <img src="./img/M_eucalipto.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CONSTRUCCION</div>
-                        <h3>Eucalipto</h3>
-                        <p>Madera de gran resistencia, apta para exteriores.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Eucalipto">Información</button>
-                            <button class="btn dark choose" data-type="Eucalipto">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Cumala -->
-                <article class="product">
-                    <img src="./img/M_cumala.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CARPINTERIA - TRIPLEY Y CHAPAS</div>
-                        <h3>Cumala</h3>
-                        <p>Madera tropical de peso liviano a moderado y fácil trabajabilidad.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Cumala">Información</button>
-                            <button class="btn dark choose" data-type="Cumala">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Tulpay -->
-                <article class="product">
-                    <img src="./img/M_tulpay.jpg" class="img-wood">
-                    <div class="product-body">
-                        <div class="tag">CONSTRUCCION - CARPINTERIA</div>
-                        <h3>Tulpay</h3>
-                        <p>Buena resistencia natural contra el ataque de hongos e insectos.</p>
-                        <div class="button-grid">
-                            <button class="button-white info" data-type="Tulpay">Información</button>
-                            <button class="btn dark choose" data-type="Tulpay">Cotiza</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        <section class="section alt" id="nosotros">
-            <div class="section-head">
-                <div class="eyebrow">Sobre nosotros</div>
-                <h2>Atención pensada para tu proyecto</h2>
-                <p>
-                    En Maderera Guzmán F y H queremos ayudarte a identificar la madera 
-                    y las dimensiones adecuadas para tu necesidad. 
-                    Solicita información antes de confirmar tu compra.
-                </p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature">
-                    <div class="symbol">🪵</div>
-                    <h3>Variedad para consultar</h3>
-                    <p>
-                        Consulta por especie, presentación, medidas y disponibilidad actual.
-                    </p>
-                </div>
-                <div class="feature">
-                    <div class="symbol">📐</div>
-                    <h3>Pedido personalizado</h3>
-                    <p>
-                        Describe tu proyecto y registra las dimensiones para que podamos revisarlas.
-                    </p>
-                </div>
-                <div class="feature">
-                    <div class="symbol">🤝</div>
-                    <h3>Cotización clara</h3>
-                    <p>
-                        Revisamos tu solicitud y confirmamos precio, stock, entrega y condiciones.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section class="section" id="cotizar">
-    <div class="section-head">
-        <div class="eyebrow">Atención personalizada</div>
-        <h2>Ponte en contacto con nosotros</h2>
-        <p>
-            Completa tus datos personales y elige el medio de contacto de tu preferencia (WhatsApp o Gmail). Nos comunicaremos contigo a la brevedad.
-        </p>
-    </div>
-    <div class="quote-wrap">
-        <!-- Cuadro adyacente reescrito -->
-        <aside class="quote-info">
-            <h3>¿Cómo funciona el proceso?</h3>
+    <header class="hero" id="inicio">
+        <div>
+            <div class="eyebrow">Tu proyecto empieza con buena madera</div>
+            <h1>La madera adecuada, el trabajo adecuado.</h1>
             <p>
-                Diseñamos una atención directa y rápida para resolver todas tus dudas o cotizaciones sobre madera.
+                Encuentra opciones de madera para construcción, 
+                carpintería y acabados. Elige el tipo, 
+                indica las medidas y la cantidad que necesitas
+                y solicita una cotización personalizada.
             </p>
-            <ul>
-                <li><strong>1. Ingresa tus datos:</strong> Nombre y vías de contacto principales.</li>
-                <li><strong>2. Elige el canal:</strong> Selecciona si prefieres recibir respuesta por WhatsApp o Gmail.</li>
-                <li><strong>3. Cuéntanos qué buscas:</strong> Medidas, tipo de madera o consulta general.</li>
-                <li><strong>4. Respuesta personalizada:</strong> Validaremos stock y precios exactos para tu solicitud.</li>
-            </ul>
+            <div class="hero-actions">
+                <a class="btn" href="#catalogo">Explorar maderas</a>
+                <a class="btn outline" href="#cotizar">Cotizar mi pedido →</a>
+            </div>
+        </div>
+        <div class="hero-card">
+            <h3>¿Qué necesitas para tu proyecto?</h3>
+            <div class="quick">
+                <span class="check">✓</span>
+                <div>
+                    <b>Escoge el tipo de madera</b><br>
+                    <small>Consulta las opciones disponibles.</small>
+                </div>
+            </div>
+            <div class="quick">
+                <span class="check">✓</span>
+                <div>
+                    <b>Indica medidas y cantidad</b><br>
+                    <small>Agrega largo, ancho, espesor o piezas.</small>
+                </div>
+            </div>
+            <div class="quick">
+                <span class="check">✓</span>
+                <div>
+                    <b>Recibe una cotización</b><br>
+                    <small>El precio final se confirma según disponibilidad y especificaciones.</small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="catalogo">
+        <div class="section-head">
+            <div class="eyebrow">Catálogo de productos</div>
+            <h2>Encuentra la madera que buscas</h2>
+            <p>Selecciona una opción para obtener información.</p>
+        </div>
+        <div class="grid">
+            <article class="product">
+                <img src="./img/M_tornillo.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CONSTRUCCION - CARPINTERIA</div>
+                    <h3>Tornillo</h3>
+                    <p>Muy utilizado en la construcción y la carpintería debido a su buena relación calidad-precio.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Tornillo">Información</button>
+                        <button class="btn dark choose" data-type="Tornillo">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product">
+                <img src="./img/M_cedro.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CARPINTERIA</div>
+                    <h3>Cedro</h3>
+                    <p>Destaca por su ligereza, estabilidad y resistencia a la humedad e insectos.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Cedro">Información</button>
+                        <button class="btn dark choose" data-type="Cedro">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product">
+                <img src="./img/M_nogal.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CARPINTERIA - ACABADOS</div>
+                    <h3>Nogal</h3>
+                    <p>Destaca por su elegancia y resistencia en ebanistería fina.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Nogal">Información</button>
+                        <button class="btn dark choose" data-type="Nogal">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product">
+                <img src="./img/M_eucalipto.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CONSTRUCCION</div>
+                    <h3>Eucalipto</h3>
+                    <p>Madera de gran resistencia, apta para exteriores.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Eucalipto">Información</button>
+                        <button class="btn dark choose" data-type="Eucalipto">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product">
+                <img src="./img/M_cumala.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CARPINTERIA - TRIPLEY Y CHAPAS</div>
+                    <h3>Cumala</h3>
+                    <p>Madera tropical de peso liviano a moderado y fácil trabajabilidad.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Cumala">Información</button>
+                        <button class="btn dark choose" data-type="Cumala">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="product">
+                <img src="./img/M_tulpay.jpg" class="img-wood">
+                <div class="product-body">
+                    <div class="tag">CONSTRUCCION - CARPINTERIA</div>
+                    <h3>Tulpay</h3>
+                    <p>Buena resistencia natural contra el ataque de hongos e insectos.</p>
+                    <div class="button-grid">
+                        <button class="button-white info" data-type="Tulpay">Información</button>
+                        <button class="btn dark choose" data-type="Tulpay">Cotiza</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section alt" id="nosotros">
+        <div class="section-head">
+            <div class="eyebrow">Sobre nosotros</div>
+            <h2>Atención pensada para tu proyecto</h2>
             <p>
-                <b>Nota:</b> No realizamos cobros automáticos. Todo pedido se confirma de forma personalizada.
+                En Maderera Guzmán F y H queremos ayudarte a identificar la madera 
+                y las dimensiones adecuadas para tu necesidad. 
+                Solicita información antes de confirmar tu compra.
             </p>
-        </aside>
-
-        <!-- Formulario de datos personales y contacto -->
-        <form class="form" id="quoteForm">
-            <h3>Formulario de contacto</h3>
-            <p class="form-intro">Los campos con * son obligatorios.</p>
-            
-            <div class="fields">
-                <div class="field full">
-                    <label for="nombre">Nombre completo *</label>
-                    <input id="nombre" type="text" required placeholder="Ej. Juan Pérez">
-                </div>
-
-                <div class="field">
-                    <label for="telefono">Teléfono / WhatsApp *</label>
-                    <input id="telefono" type="tel" maxlength="9" required placeholder="Ej. 987654321">
-                </div>
-
-                <div class="field">
-                    <label for="email">Correo electrónico (Gmail) *</label>
-                    <input id="email" type="email" required placeholder="ejemplo@gmail.com">
-                </div>
-
-                <div class="field full">
-                    <label for="medioContacto">¿Por dónde prefieres que te contactemos? *</label>
-                    <select id="medioContacto" required>
-                        <option value="whatsapp" selected>WhatsApp</option>
-                        <option value="gmail">Gmail / Correo electrónico</option>
-                    </select>
-                </div>
-
-                <div class="field full">
-                    <label for="ubicacion">Ciudad / Distrito de entrega</label>
-                    <input id="ubicacion" type="text" placeholder="Ej. Huancayo, Junín">
-                </div>
-
-                <div class="field full">
-                    <label for="detalle">Consulta o detalle del pedido</label>
-                    <textarea 
-                        id="detalle" 
-                        placeholder="Menciona la madera de tu interés, cantidades, medidas aproximadas o cualquier pregunta."
-                    ></textarea>
-                </div>
+        </div>
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="symbol">🪵</div>
+                <h3>Variedad para consultar</h3>
+                <p>Consulta por especie, presentación, medidas y disponibilidad actual.</p>
             </div>
+            <div class="feature">
+                <div class="symbol">📐</div>
+                <h3>Pedido personalizado</h3>
+                <p>Describe tu proyecto y registra las dimensiones para que podamos revisarlas.</p>
+            </div>
+            <div class="feature">
+                <div class="symbol">🤝</div>
+                <h3>Cotización clara</h3>
+                <p>Revisamos tu solicitud y confirmamos precio, stock, entrega y condiciones.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="form-actions">
-                <button type="submit" class="btn dark" id="submitBtn">Enviar por WhatsApp</button>
-                <button type="button" id="copyBtn" class="btn">Copiar datos</button>
-            </div>
+    <section class="section" id="cotizar">
+        <div class="section-head">
+            <div class="eyebrow">Atención personalizada</div>
+            <h2>Ponte en contacto con nosotros</h2>
+            <p>Completa tus datos personales y elige el medio de contacto de tu preferencia (WhatsApp o Gmail).</p>
+        </div>
+        <div class="quote-wrap">
+            <aside class="quote-info">
+                <h3>¿Cómo funciona el proceso?</h3>
+                <p>Diseñamos una atención directa y rápida para resolver todas tus dudas o cotizaciones sobre madera.</p>
+                <ul>
+                    <li><strong>1. Ingresa tus datos:</strong> Nombre y vías de contacto principales.</li>
+                    <li><strong>2. Elige el canal:</strong> Selecciona si prefieres recibir respuesta por WhatsApp o Gmail.</li>
+                    <li><strong>3. Cuéntanos qué buscas:</strong> Medidas, tipo de madera o consulta general.</li>
+                    <li><strong>4. Respuesta personalizada:</strong> Validaremos stock y precios exactos para tu solicitud.</li>
+                </ul>
+                <p><b>Nota:</b> No realizamos cobros automáticos. Todo pedido se confirma de forma personalizada.</p>
+            </aside>
 
-            <p class="form-note">
-                Al enviar la solicitud se abrirá tu aplicación de WhatsApp con el mensaje listo para enviar.
-            </p>
-        </form>
-    </div>
-</section>
-        <section class="section alt" id="contacto">
-            <div class="section-head">
-                <div class="eyebrow">Contacto</div>
-                <h2>Estamos listos para atender tu consulta</h2>
-                <p>
-                    Actualiza los datos de contacto antes de publicar
-                    la web para que tus clientes puedan comunicarse contigo.
-                </p>
-            </div>
-            <div class="contact">
-                <div class="contact-card">
-                    <h3>📱 WhatsApp y llamadas</h3>
-                    <p>Pendiente: número oficial de WhatsApp y llamadas.</p>
-                    <b>Atención:</b> 
-                    consulta horarios y disponibilidad.
+            <form class="form" id="quoteForm">
+                <h3>Formulario de contacto</h3>
+                <p class="form-intro">Los campos con * son obligatorios.</p>
+                
+                <div class="fields">
+                    <div class="field full">
+                        <label for="nombre">Nombre completo *</label>
+                        <input id="nombre" type="text" required placeholder="Ej. Juan Pérez">
+                    </div>
+
+                    <div class="field">
+                        <label for="telefono">Teléfono / WhatsApp *</label>
+                        <input id="telefono" type="tel" maxlength="9" required placeholder="Ej. 987654321">
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Correo electrónico (Gmail) *</label>
+                        <input id="email" type="email" required placeholder="ejemplo@gmail.com">
+                    </div>
+
+                    <div class="field full">
+                        <label for="medioContacto">¿Por dónde prefieres que te contactemos? *</label>
+                        <select id="medioContacto" required>
+                            <option value="whatsapp" selected>WhatsApp</option>
+                            <option value="gmail">Gmail / Correo electrónico</option>
+                        </select>
+                    </div>
+
+                    <div class="field full">
+                        <label for="ubicacion">Ciudad / Distrito de entrega</label>
+                        <input id="ubicacion" type="text" placeholder="Ej. Huancayo, Junín">
+                    </div>
+
+                    <div class="field full">
+                        <label for="detalle">Consulta o detalle del pedido</label>
+                        <textarea id="detalle" placeholder="Menciona la madera de tu interés, cantidades, medidas aproximadas o cualquier pregunta."></textarea>
+                    </div>
                 </div>
-                <div class="contact-card">
-                    <h3>📍 Ubicación y horarios</h3>
-                    <p>
-                        Pendiente: dirección exacta, 
-                        horario de atención y referencia para llegar.
-                    </p>
-                    <b>Zona de atención:</b> 
-                    actualizar según cobertura real.
+
+                <div class="form-actions">
+                    <button type="submit" class="btn dark" id="submitBtn">Enviar por WhatsApp</button>
+                    <button type="button" id="copyBtn" class="btn">Copiar datos</button>
                 </div>
+
+                <p class="form-note">Al enviar la solicitud se procesará mediante el canal seleccionado.</p>
+            </form>
+        </div>
+    </section>
+
+    <section class="section alt" id="contacto">
+        <div class="section-head">
+            <div class="eyebrow">Contacto</div>
+            <h2>Estamos listos para atender tu consulta</h2>
+            <p>Actualiza los datos de contacto antes de publicar la web para que tus clientes puedan comunicarse contigo.</p>
+        </div>
+        <div class="contact">
+            <div class="contact-card">
+                <h3>📱 WhatsApp y llamadas</h3>
+                <p>Atención directa por WhatsApp al +51 960 835 957.</p>
             </div>
-        </section>
-        <footer>
-            <div>
-                <b>MADERERA GUZMÁN F y H</b>
-                <br>
-                <small>Madera para tus proyectos de construcción y carpintería.</small>
+            <div class="contact-card">
+                <h3>📍 Ubicación y horarios</h3>
+                <p>Atención comercial y envíos según cobertura.</p>
             </div>
-            <div>
-                Catálogo · Cotizaciones · Atención al cliente
-                <br>
-                <small>© 2026 Maderera Guzmán F y H. Todos los derechos reservados.</small>
-            </div>
-        </footer>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <b>MADERERA GUZMÁN F y H</b><br>
+            <small>Madera para tus proyectos de construcción y carpintería.</small>
+        </div>
+        <div>
+            Catálogo · Cotizaciones · Atención al cliente<br>
+            <small>© 2026 Maderera Guzmán F y H. Todos los derechos reservados.</small>
+        </div>
+    </footer>
+
     <script src="Funcionallity.js"></script>
 </body>
 </html>
