@@ -1,31 +1,27 @@
 
-// CONFIGURACIÓN DE EMAILJS
-
-const CONFIG_EMAILJS = {
-    publicKey: 'XMdtUXA4EP02Xxtba',   // 
-    serviceId: 'service_gqvv85l',   // 
-    templateId: 'template_1d75ikm'  // 
+// CONFIGURACIÓN DE DATOS DE CONTACTO Y EMAILJS
+const CONFIG = {
+    whatsappNumber: '51960835957',
+    emailjsPublicKey: 'XMdtUXA4EP02Xxtba',   
+    emailjsServiceId: 'service_gqvv85l',   
+    emailjsTemplateId: 'template_1d75ikm'  
 };
 
-// Inicializar EmailJS si el SDK se cargó correctamente en el HTML
+// Inicialización de EmailJS
 (function() {
-    if (typeof emailjs !== 'undefined' && CONFIG_EMAILJS.publicKey !== 'XMdtUXA4EP02Xxtba') {
-        emailjs.init(CONFIG_EMAILJS.publicKey);
+    if (typeof emailjs !== 'undefined' && CONFIG.emailjsPublicKey) {
+        emailjs.init(CONFIG.emailjsPublicKey);
     }
 })();
 
-
-// OBTENER REFERENCIAS AL DOM
-
+// ELEMENTOS DEL DOM
 const medioContactoSelect = document.getElementById('medioContacto');
 const submitBtn = document.getElementById('submitBtn');
 const quoteForm = document.getElementById('quoteForm');
 const detalleInput = document.getElementById('detalle');
 const copyBtn = document.getElementById('copyBtn');
 
-
-// CAMBIAR TEXTO DEL BOTÓN SEGÚN CANAL
-
+// CAMBIO DINÁMICO DE BOTÓN SEGÚN CANAL
 if (medioContactoSelect && submitBtn) {
     medioContactoSelect.addEventListener('change', () => {
         if (medioContactoSelect.value === 'whatsapp') {
@@ -36,16 +32,12 @@ if (medioContactoSelect && submitBtn) {
     });
 }
 
-
-//  ACCIONES DE BOTONES EN EL CATÁLOGO
-
-
-// Botón Cotiza Escribe el nombre de la madera en la consulta, desplaza la pantalla y enfoca el campo.
+// ACCIONES DE NAVEGACIÓN EN EL CATÁLOGO
 document.querySelectorAll('.choose').forEach(button => {
     button.addEventListener('click', () => {
         const maderaType = button.dataset.type || 'Madera seleccionada';
         if (detalleInput) {
-            detalleInput.value = `Hola, me interesa solicitar cotización e información sobre la madera: ${maderaType}.`;
+            detalleInput.value = `Hola, me interesa solicitar cotización sobre la madera: ${maderaType}.`;
             const cotizarSection = document.getElementById('cotizar');
             if (cotizarSection) {
                 cotizarSection.scrollIntoView({ behavior: 'smooth' });
@@ -55,7 +47,6 @@ document.querySelectorAll('.choose').forEach(button => {
     });
 });
 
-// Botón Información Redirige a la página de detalles pasando el parámetro de la madera.
 document.querySelectorAll('.info').forEach(button => {
     button.addEventListener('click', () => {
         const madera = button.dataset.type;
@@ -65,20 +56,21 @@ document.querySelectorAll('.info').forEach(button => {
     });
 });
 
-
-// ENVÍO DEL FORMULARIO (WHATSAPP / GMAIL)
+// PROCESAMIENTO DEL FORMULARIO
 if (quoteForm) {
     quoteForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         const canal = medioContactoSelect ? medioContactoSelect.value : 'whatsapp';
-        const nombre = document.getElementById('nombre')?.value.trim() || '';
-        const telefono = document.getElementById('telefono')?.value.trim() || '';
-        const email = document.getElementById('email')?.value.trim() || '';
+        const nombre = document.getElementById('nombre')?.value.trim() || 'No especificado';
+        const telefono = document.getElementById('telefono')?.value.trim() || 'No especificado';
+        const email = document.getElementById('email')?.value.trim() || 'No especificado';
         const ubicacion = document.getElementById('ubicacion')?.value.trim() || 'No especificada';
         const detalle = document.getElementById('detalle')?.value.trim() || 'Sin detalles adicionales';
-
-        // WHATSAPP VÍA VERCEL 
+        
+        // ----------------------------------------------------
+        // CANAL 1: WHATSAPP AUTOMÁTICO (Vía Vercel Serverless Function)
+        // ----------------------------------------------------
         if (canal === 'whatsapp') {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando WhatsApp...';
@@ -96,37 +88,46 @@ if (quoteForm) {
                     alert('¡Solicitud enviada con éxito por WhatsApp!');
                     quoteForm.reset();
                 } else {
-                    throw new Error(result.message || 'Error al procesar el envío por WhatsApp');
+                    throw new Error(result.message || 'Error al procesar el mensaje de WhatsApp.');
                 }
             } catch (error) {
                 console.error('Error WhatsApp:', error);
-                alert('No se pudo enviar el mensaje por WhatsApp. Inténtalo nuevamente o prueba la opción de Gmail.');
+                alert('No se pudo enviar el mensaje por WhatsApp. Por favor verifica tus datos o intenta seleccionar la opción de Gmail.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar por WhatsApp';
             }
 
-        // GMAIL VÍA 
+        // ----------------------------------------------------
+        // CANAL 2: GMAIL AUTOMÁTICO (Vía EmailJS)
+        // ----------------------------------------------------
         } else if (canal === 'gmail') {
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando correo...';
 
             try {
-                if (typeof emailjs === 'undefined' || CONFIG_EMAILJS.publicKey === 'TU_PUBLIC_KEY_EMAILJS') {
-                    throw new Error('EmailJS no está configurado. Revisa las credenciales en Funcionallity.js.');
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('La librería EmailJS no se ha cargado correctamente.');
                 }
 
                 await emailjs.send(
-                    CONFIG_EMAILJS.serviceId, 
-                    CONFIG_EMAILJS.templateId, 
-                    { nombre, telefono, email, ubicacion, detalle }
+                    CONFIG.emailjsServiceId,
+                    CONFIG.emailjsTemplateId,
+                    {
+                        nombre: nombre,
+                        telefono: telefono,
+                        email: email,
+                        ubicacion: ubicacion,
+                        detalle: detalle
+                    }
                 );
 
-                alert('¡Correo enviado con éxito! Nos comunicaremos contigo pronto.');
+                alert('¡Correo enviado con éxito! Recibiremos tus datos y te responderemos a la brevedad.');
                 quoteForm.reset();
+
             } catch (err) {
-                console.error('Error EmailJS:', err);
-                alert('Ocurrió un error al enviar el correo automático. Verifica la configuración de EmailJS.');
+                console.error('Error al enviar con EmailJS:', err);
+                alert('No se pudo enviar el correo automático. Por favor verifica tus datos o selecciona la opción WhatsApp.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar por Gmail';
@@ -135,8 +136,7 @@ if (quoteForm) {
     });
 }
 
-
-// COPIAR DATOS DE LA SOLICITUD
+// BOTÓN AUXILIAR PARA COPIAR DATOS
 if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
         const v = id => document.getElementById(id)?.value.trim() || 'No especificado';
