@@ -6,10 +6,10 @@ export default async function handler(req, res) {
 
     const { nombre, telefono, ubicacion, detalle } = req.body;
 
-    // Variables de Vercel
+    // Variables de entorno desde Vercel
     const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
     const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
-    const RECEIVER = process.env.WHATSAPP_RECEIVER || '51960835957'; 
+    const RECEIVER = process.env.WHATSAPP_RECEIVER || '51960835957'; // Número receptor (Maderera)
 
     if (!META_ACCESS_TOKEN || !PHONE_NUMBER_ID) {
         return res.status(500).json({ 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const url = `https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages`;
+        const url = `https://graph.facebook.com/v25.0/${PHONE_NUMBER_ID}/messages`;
 
         const response = await fetch(url, {
             method: 'POST',
